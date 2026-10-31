@@ -1,7 +1,8 @@
 {
   "packages": {
     ".": {
-      "release-type": "java"
+      "release-type": "java",
+      "skip-snapshot": true
     }
   }
 }
