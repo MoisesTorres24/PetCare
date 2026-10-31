@@ -2,7 +2,10 @@
   "packages": {
     ".": {
       "release-type": "java",
-      "skip-snapshot": true
+      "skip-snapshot": true,
+      "extra-files": [
+        { "type": "pom", "path": "pom.xml" }
+      ]
     }
   }
 }
