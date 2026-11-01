@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+/** Representa un consultorio identificado dentro de la clínica. */
 public class ConsultingRoom {
+    /** Número o código del consultorio. */
     private String roomNumber;
 
+    /** Crea un consultorio con su identificador. */
     public ConsultingRoom(String roomNumber) {
         this.roomNumber = roomNumber;
     }
@@ -16,10 +19,12 @@ public class ConsultingRoom {
 //    }
 
 
+    /** Obtiene el identificador del consultorio. */
     public String getRoomNumber() {
         return roomNumber;
     }
 
+    /** Actualiza el identificador del consultorio. */
     public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
     }

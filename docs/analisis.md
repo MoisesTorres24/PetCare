@@ -4,7 +4,7 @@
 
 | Nombre  | Tipo | Atributos / Constantes | Responsabilidades (Métodos) | Justificación en el Dominio |
 | :---- | :---- | :---- | :---- | :---- |
-| **Validatable** | Interfaz | (No aplica) | validateData(): Valida que los datos numéricos ingresados sean mayores o iguales a cero. | Obliga a las entidades con datos sensibles (edades, costos, salarios) a implementar su propia lógica de validación. |
+| **Validatable** | Clase de utilidades | (No aplica) | Métodos estáticos para validar enteros, decimales y textos obligatorios. | Centraliza las reglas de validación sin obligar a las entidades a implementar una interfaz. |
 | **Person** | Abstracta | id: Identificador único. firstName: Nombre de pila. lastName: Apellidos. phone: Teléfono de contacto. email: Correo electrónico. | Getters / Setters: Recuperan y asignan los datos básicos de contacto. | Centraliza la información personal compartida por clientes y empleados, evitando código duplicado. |
 | **Client** | Concreta | address: Domicilio del cliente. | registerPet(): Asocia una mascota a este cliente. | Representa al dueño de las mascotas y sirve como identificador clave (llave) en las búsquedas del sistema. |
 | **Employee** | Abstracta | employeeId: Número de empleado. role (EmployeeRole): Cargo administrativo. baseSalary: Sueldo base. | validateData(): Lanza excepción si el salario asignado es negativo. | Define la estructura administrativa y salarial del personal de la clínica. |
@@ -23,7 +23,7 @@
 | **Vaccination** | Concreta | baseFee: Costo de aplicación. vaccineType (VaccineType): Biológico. | calculateCost(): Suma la tarifa de aplicación al costo de la vacuna. | Calcula el precio total dependiendo del biológico específico suministrado. |
 | **Surgery** | Concreta | hours: Duración en quirófano. complexityLevel (SurgeryComplexity): Nivel de riesgo. | calculateCost(): Multiplica horas por un factor de riesgo. | Calcula el precio de procedimientos complejos basándose en el tiempo y el riesgo médico. |
 | **Receipt** | Concreta | totalAmount: Monto final. issueDate: Fecha de expedición. | generateTicket(): Imprime el desglose de servicios y total. | Consolida el cobro final de una cita en un registro contable inmutable. |
-| **ClinicController** | Concreta | clientPets (HashMap): Dueños y sus mascotas. waitingRoom (Queue): Pacientes en espera. | scheduleAppointment(): Valida disponibilidad y agenda. calculateVetIncome(): Suma ingresos de un médico. | Coordina las operaciones, maneja búsquedas $O(1)$ y procesa peticiones de los menús sin acoplar la vista. |
+| **ClinicController** | Concreta | clients (TreeMap): Dueños indexados por ID. waitingRoom (Queue): Pacientes en espera. | Registra dueños y mascotas de forma atómica y consulta dueños por ID. | Coordina las operaciones y procesa peticiones de los menús sin acoplar la vista. |
 | **Menu** | Interfaz | (No aplica) | displayOptions(): Muestra opciones en consola. readUserInput(): Lee selección del usuario. | Estandariza la forma en que los distintos menús interactúan con la consola de texto. |
 | **AdminMenu** | Concreta | controller (ClinicController): Gestor general. scanner: Lector de consola. | displayOptions(): Imprime opciones exclusivas de administración. | Proporciona la interfaz de consola para usuarios con permisos administrativos. |
 | **ReceptionistMenu** | Concreta | controller (ClinicController): Gestor general. scanner: Lector de consola. | displayOptions(): Imprime opciones operativas de mostrador. | Proporciona la interfaz de consola para la operación diaria en recepción. |
