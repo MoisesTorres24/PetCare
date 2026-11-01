@@ -34,6 +34,7 @@ public class RegistrationView {
      */
     public void registerClientWithPet() {
         try {
+            System.out.println("=== Registrando dueño y mascota ===");
             // 1. Capturar datos del cliente y registrar
             Client newClient = controller.registerClient(
                     InputHelper.readText(scanner, "Nombre"),
@@ -58,6 +59,7 @@ public class RegistrationView {
      * Registra una mascota para un cliente previamente existente.
      */
     public void registerPetToExistingClient() {
+        System.out.println("=== Registrando mascota ===");
         if (!controller.hasClients()) {
             System.out.println("No hay dueños registrados. Use la opción 1 primero.");
             return;
