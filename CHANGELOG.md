@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/MoisesTorres24/PetCare/compare/v0.2.1...v0.3.0) (2026-11-01)
+
+
+### Features
+
+* registration pets and owners ([#8](https://github.com/MoisesTorres24/PetCare/issues/8)) ([713e6a7](https://github.com/MoisesTorres24/PetCare/commit/713e6a7e22c4ddea462ab874e246f80ba6a69b5a))
+
 ## [0.2.1](https://github.com/MoisesTorres24/PetCare/compare/v0.2.0...v0.2.1) (2026-10-31)
 
 
