@@ -11,9 +11,9 @@ public class ClinicController {
     private Map<Client, List<Pet>> clientPets = new HashMap<>();
     private Queue<Pet> waitingRoom = new LinkedList<>();
 
-    public ClinicController(Map<Client, List<Pet>> clientPets, Queue<Pet> waitingRoom) {
-        this.clientPets = clientPets;
-        this.waitingRoom = waitingRoom;
+    public ClinicController() {
+        this.clientPets = new HashMap<>();
+        this.waitingRoom = new LinkedList<>();
     }
 
 //    public Appointment scheduleAppointment(){
