@@ -1,6 +1,6 @@
 package org.petcare.app;
 
-import org.petcare.controller.ClinicController;
+import org.petcare.controller.RegistrationController;
 import org.petcare.view.AdminMenu;
 import org.petcare.view.Menu;
 import org.petcare.view.ReceptionistMenu;
@@ -8,9 +8,12 @@ import org.petcare.view.ReceptionistMenu;
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * Inicia la aplicación y presenta el menú correspondiente al perfil elegido.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ClinicController controller = new ClinicController();
+        RegistrationController controller = new RegistrationController();
 
         System.out.println("=== SISTEMA DE GESTIÓN VETERINARIA PETCARE ===");
         System.out.println("Seleccione el perfil de acceso:");
@@ -19,6 +22,7 @@ public class Main {
         System.out.print("Opción: ");
 
         int choice;
+        // Se descartan entradas no numéricas antes de leer el perfil.
         while (!scanner.hasNextInt()) {
             System.out.print("Opción inválida. Seleccione 1 o 2: ");
             scanner.nextLine();
