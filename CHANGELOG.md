@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/MoisesTorres24/PetCare/compare/v0.3.0...v0.4.0) (2026-11-02)
+
+
+### Features
+
+* register veterinarian ([#10](https://github.com/MoisesTorres24/PetCare/issues/10)) ([31a9c61](https://github.com/MoisesTorres24/PetCare/commit/31a9c613e06dfa08e6a49257b8d81821c94eb342))
+
 ## [0.3.0](https://github.com/MoisesTorres24/PetCare/compare/v0.2.1...v0.3.0) (2026-11-01)
 
 
