@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/MoisesTorres24/PetCare/compare/v0.5.0...v0.6.0) (2026-11-02)
+
+
+### Features
+
+* implementation of options 5 through 10 ([#14](https://github.com/MoisesTorres24/PetCare/issues/14)) ([9083ea0](https://github.com/MoisesTorres24/PetCare/commit/9083ea0aa4ec95bea09f9875839a263201ec71a9))
+
 ## [0.5.0](https://github.com/MoisesTorres24/PetCare/compare/v0.4.0...v0.5.0) (2026-11-02)
 
 
