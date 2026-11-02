@@ -3,9 +3,12 @@ package org.petcare.model.clinic;
 import org.petcare.model.person.Employee;
 import org.petcare.model.person.Client;
 import org.petcare.model.person.Veterinarian;
+import org.petcare.model.pet.Pet;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -21,6 +24,10 @@ public class Clinic {
     private Map<Integer, Client> clients;
     /** Veterinarios registrados, indexados por su identificador laboral. */
     private Map<Integer, Veterinarian> veterinarians;
+    /** Consultorios disponibles en la clínica. */
+    private Map<String, ConsultingRoom> rooms;
+    /** Citas registradas en la clínica. */
+    private List<Appointment> appointments;
 
     /**
      * Crea una clínica con nombre y dirección.
@@ -33,6 +40,7 @@ public class Clinic {
         this.address = address;
         this.clients = new TreeMap<>();
         this.veterinarians = new TreeMap<>();
+        initializeCollections();
     }
 
     /**
@@ -47,6 +55,19 @@ public class Clinic {
         this.numberOfRooms = numberOfRooms;
         this.clients = new TreeMap<>();
         this.veterinarians = new TreeMap<>();
+        initializeCollections();
+        initializeRooms(numberOfRooms);
+    }
+
+    private void initializeCollections() {
+        this.rooms = new TreeMap<>();
+        this.appointments = new ArrayList<>();
+    }
+
+    private void initializeRooms(int numberOfRooms) {
+        for (int roomId = 1; roomId <= numberOfRooms; roomId++) {
+            addRoom(new ConsultingRoom(String.valueOf(roomId)));
+        }
     }
 
     /**
@@ -104,14 +125,39 @@ public class Clinic {
         return Collections.unmodifiableCollection(veterinarians.values());
     }
 
+    public Collection<Pet> getAllPets() {
+        List<Pet> pets = new ArrayList<>();
+        for (Client client : clients.values()) {
+            pets.addAll(client.getPets());
+        }
+        return Collections.unmodifiableCollection(pets);
+    }
+
+    public Collection<ConsultingRoom> getAllRooms() {
+        return Collections.unmodifiableCollection(rooms.values());
+    }
+
+    public void addAppointment(Appointment appointment) {
+        if (appointment == null) {
+            throw new IllegalArgumentException("La cita no puede ser nula");
+        }
+        appointments.add(appointment);
+    }
+
+    public Collection<Appointment> getAllAppointments() {
+        return Collections.unmodifiableCollection(appointments);
+    }
+
     /** Registra un empleado en la clínica cuando se implemente su almacenamiento. */
     public void addEmployee(Employee employee) {
 
     }
 
-    /** Registra un consultorio cuando se implemente su almacenamiento. */
     public void addRoom(ConsultingRoom room) {
-
+        if (room == null) {
+            throw new IllegalArgumentException("El consultorio no puede ser nulo");
+        }
+        rooms.put(room.getRoomNumber(), room);
     }
 
     /** Obtiene el nombre de la clínica. */

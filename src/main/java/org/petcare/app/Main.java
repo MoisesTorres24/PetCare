@@ -1,7 +1,9 @@
 package org.petcare.app;
 
 import org.petcare.controller.RegistrationController;
+import org.petcare.controller.AppointmentController;
 import org.petcare.model.clinic.Clinic;
+import org.petcare.view.AppointmentView;
 import org.petcare.util.InputHelper;
 import org.petcare.view.AdminMenu;
 import org.petcare.view.Menu;
@@ -19,6 +21,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Clinic petCareClinic = new Clinic("PetCare", 5);
         RegistrationController controller = new RegistrationController(petCareClinic);
+        AppointmentController appointmentController = new AppointmentController(petCareClinic);
+        AppointmentView appointmentView = new AppointmentView(appointmentController, controller, scanner);
 
         System.out.println("=== SISTEMA DE GESTIÓN VETERINARIA PETCARE ===");
         System.out.println("Seleccione el perfil de acceso:");
@@ -30,7 +34,7 @@ public class Main {
 
         // Evaluamos el rol para decidir qué menú instanciar (Polimorfismo)
         if (choice == 1) {
-            currentMenu = new AdminMenu(controller, scanner);
+            currentMenu = new AdminMenu(controller, appointmentView, scanner);
         } else {
             currentMenu = new ReceptionistMenu(controller, scanner);
         }

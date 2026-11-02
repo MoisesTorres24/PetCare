@@ -11,13 +11,15 @@ import java.util.Scanner;
 public class AdminMenu implements Menu {
     private static final int EXIT_OPTION = 12;
     private final RegistrationView registrationHelper;
+    private final AppointmentView appointmentView;
     private final Scanner scanner;
 
     /**
      * Crea el menú y conecta sus utilidades de registro con la entrada.
      */
-    public AdminMenu(RegistrationController controller, Scanner scanner) {
+    public AdminMenu(RegistrationController controller, AppointmentView appointmentView, Scanner scanner) {
         this.registrationHelper = new RegistrationView(controller, scanner);
+        this.appointmentView = appointmentView;
         this.scanner = scanner;
     }
 
@@ -40,10 +42,10 @@ public class AdminMenu implements Menu {
                     registrationHelper.registerVeterinarian();
                     break;
                 case 4:
-                    System.out.println("Agendamiento de cita.");
+                    appointmentView.displayScheduleAppointment();
                     break;
                 case 5:
-                    System.out.println("Atención o cancelación de cita.");
+                    appointmentView.displayManageAppointment();
                     break;
                 case 6:
                     System.out.println("Generación del comprobante.");
