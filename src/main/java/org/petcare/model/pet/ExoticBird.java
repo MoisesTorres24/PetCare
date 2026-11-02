@@ -28,10 +28,16 @@ public class ExoticBird extends Pet {
     }
 
     /**
-     * Actualiza la envergadura y valida que no sea negativa.
+     * Actualiza la envergadura y valida que sea mayor que cero.
+     *
+     * @param wingSpan envergadura en centímetros
+     * @throws IllegalArgumentException si la envergadura es menor o igual a cero
      */
     public void setWingSpan(double wingSpan) {
         Validatable.nonNegativeDecimal(wingSpan, "envergadura");
+        if (wingSpan <= 0) {
+            throw new IllegalArgumentException("la envergadura debe ser mayor que cero");
+        }
         this.wingSpan = wingSpan;
     }
 
@@ -39,7 +45,7 @@ public class ExoticBird extends Pet {
     /** Emite el sonido del ave exótica. */
     public void makeSound() {
         // Imprime el canto característico del ave exótica
-        System.out.println("¡Pío, pío!");
+        System.out.println("¡Pío, pío, trino exótico!");
     }
 
     @Override

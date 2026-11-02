@@ -29,16 +29,21 @@ public class Vaccination extends Service {
 
     /**
      * Crea una vacunación con tarifa y tipo de vacuna.
+     *
+     * @param baseFee     tarifa base de aplicación
+     * @param vaccineType tipo de vacuna aplicada
      */
     public Vaccination(double baseFee, VaccineType vaccineType) {
         super("Vacunación");
         setBaseFee(baseFee);
-        this.vaccineType = Objects.requireNonNull(vaccineType, "El tipo de vacuna no puede ser nulo");
+        this.vaccineType = Objects.requireNonNull(
+                vaccineType, "El tipo de vacuna no puede ser nulo");
     }
 
     @Override
-    /** Calcula el costo de la vacunación. */
+    /** Calcula el costo sumando la tarifa base y el costo de la vacuna. */
     public double calculateCost() {
+        // Regla de negocio: la vacunación suma el costo de la vacuna a la tarifa base
         return baseFee + vaccineType.getCost();
     }
 
@@ -68,6 +73,7 @@ public class Vaccination extends Service {
      * Actualiza el tipo de vacuna.
      */
     public void setVaccineType(VaccineType vaccineType) {
-        this.vaccineType = vaccineType;
+        this.vaccineType = Objects.requireNonNull(
+                vaccineType, "El tipo de vacuna no puede ser nulo");
     }
 }

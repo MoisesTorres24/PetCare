@@ -56,6 +56,9 @@ public class Appointment implements Comparable<Appointment> {
      * @param pet nueva mascota
      */
     public void setPet(Pet pet) {
+        if (pet == null) {
+            throw new IllegalArgumentException("La mascota no puede ser nula");
+        }
         this.pet = pet;
     }
 
@@ -69,6 +72,9 @@ public class Appointment implements Comparable<Appointment> {
      * @param veterinarian nuevo veterinario
      */
     public void setVeterinarian(Veterinarian veterinarian) {
+        if (veterinarian == null) {
+            throw new IllegalArgumentException("El veterinario no puede ser nulo");
+        }
         this.veterinarian = veterinarian;
     }
 
@@ -86,6 +92,9 @@ public class Appointment implements Comparable<Appointment> {
      * @param services nuevos servicios
      */
     public void setServices(List<Service> services) {
+        if (services == null || services.isEmpty()) {
+            throw new IllegalArgumentException("La cita debe tener al menos un servicio");
+        }
         this.services = new ArrayList<>(services);
     }
 
@@ -95,6 +104,9 @@ public class Appointment implements Comparable<Appointment> {
      * @param room nuevo consultorio
      */
     public void setRoom(ConsultingRoom room) {
+        if (room == null) {
+            throw new IllegalArgumentException("El consultorio no puede ser nulo");
+        }
         this.room = room;
     }
 
@@ -108,6 +120,9 @@ public class Appointment implements Comparable<Appointment> {
      * @param dateTime nueva fecha y hora
      */
     public void setDateTime(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            throw new IllegalArgumentException("La fecha y hora no pueden ser nulas");
+        }
         this.dateTime = dateTime;
     }
 
@@ -116,18 +131,35 @@ public class Appointment implements Comparable<Appointment> {
     }
 
     /**
-     * Actualiza el estado de la cita.
+     * Actualiza el estado de la cita validando las reglas de negocio.
      *
      * @param status nuevo estado
+     * @throws IllegalArgumentException si la transición de estado es inválida
      */
     public void setStatus(AppointmentStatus status) {
+        if (status == null) {
+            throw new IllegalArgumentException("El estado no puede ser nulo");
+        }
+        // Regla de negocio: una cita cancelada no puede marcarse como atendida
+        if (this.status == AppointmentStatus.CANCELED
+                && status == AppointmentStatus.COMPLETED) {
+            throw new IllegalArgumentException("Una cita cancelada no puede ser atendida");
+        }
+        // Protegemos también que una cita atendida no se cancele después
+        if (this.status == AppointmentStatus.COMPLETED
+                && status == AppointmentStatus.CANCELED) {
+            throw new IllegalArgumentException("Una cita ya atendida no puede cancelarse");
+        }
         this.status = status;
+        // Si la cita se atiende, se guarda en el historial clínico de la mascota
+        if (status == AppointmentStatus.COMPLETED && this.pet != null) {
+            this.pet.getHistory().addRecord(this);
+        }
     }
 
     @Override
     /**
      * Compara dos citas por fecha y hora para mantener el orden en TreeSet.
-     * Si la fecha es igual, desempata por el identificador de la cita.
      *
      * @param other otra cita a comparar
      * @return valor negativo, cero o positivo según el orden cronológico
