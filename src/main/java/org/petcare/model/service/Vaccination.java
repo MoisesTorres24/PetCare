@@ -8,6 +8,7 @@ import org.petcare.util.Validatable;
  * Servicio de vacunación con tarifa y tipo de vacuna.
  */
 public class Vaccination extends Service {
+    private static final double DEFAULT_APPLICATION_FEE = 100.0;
     /**
      * Tarifa base de aplicación.
      */
@@ -16,6 +17,15 @@ public class Vaccination extends Service {
      * Tipo de vacuna aplicada.
      */
     private VaccineType vaccineType;
+
+    /**
+     * Crea una vacunación usando la tarifa fija de aplicación.
+     *
+     * @param vaccineType tipo de vacuna aplicada
+     */
+    public Vaccination(VaccineType vaccineType) {
+        this(DEFAULT_APPLICATION_FEE, vaccineType);
+    }
 
     /**
      * Crea una vacunación con tarifa y tipo de vacuna.
@@ -29,7 +39,7 @@ public class Vaccination extends Service {
     @Override
     /** Calcula el costo de la vacunación. */
     public double calculateCost() {
-        return 0;
+        return vaccineType.getCost();
     }
 
     /**

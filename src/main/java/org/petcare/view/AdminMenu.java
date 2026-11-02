@@ -6,18 +6,21 @@ import org.petcare.util.InputHelper;
 import java.util.Scanner;
 
 /**
- * Menú de operaciones disponibles para el perfil administrador.
+ * Menú general de operaciones de la clínica veterinaria.
  */
 public class AdminMenu implements Menu {
-    private static final int EXIT_OPTION = 12;
+    private static final int EXIT_OPTION = 11;
     private final RegistrationView registrationHelper;
+    private final AppointmentView appointmentView;
     private final Scanner scanner;
 
     /**
      * Crea el menú y conecta sus utilidades de registro con la entrada.
      */
-    public AdminMenu(RegistrationController controller, Scanner scanner) {
+    public AdminMenu(RegistrationController controller, AppointmentView appointmentView,
+                     Scanner scanner) {
         this.registrationHelper = new RegistrationView(controller, scanner);
+        this.appointmentView = appointmentView;
         this.scanner = scanner;
     }
 
@@ -40,10 +43,10 @@ public class AdminMenu implements Menu {
                     registrationHelper.registerVeterinarian();
                     break;
                 case 4:
-                    System.out.println("Agendamiento de cita.");
+                    appointmentView.displayScheduleAppointment();
                     break;
                 case 5:
-                    System.out.println("Atención o cancelación de cita.");
+                    appointmentView.displayManageAppointment();
                     break;
                 case 6:
                     System.out.println("Generación del comprobante.");
@@ -60,11 +63,8 @@ public class AdminMenu implements Menu {
                 case 10:
                     System.out.println("Baja de mascota.");
                     break;
-                case 11:
-                    System.out.println("Administración de empleados.");
-                    break;
                 case EXIT_OPTION:
-                    System.out.println("Saliendo del menú de administrador...");
+                    System.out.println("Saliendo del sistema...");
                     break;
                 default:
                     System.out.println("Opción no reconocida.");
@@ -74,7 +74,7 @@ public class AdminMenu implements Menu {
 
     private void showOptions() {
         // La opción 2 registra mascotas de dueños que ya existen.
-        System.out.println("\n===== MENÚ ADMINISTRADOR =====");
+        System.out.println("\n===== MENÚ PRINCIPAL =====");
         System.out.println("1. Registrar dueño y mascota");
         System.out.println("2. Registrar mascota");
         System.out.println("3. Registrar veterinario y asignarlo a la clínica");
@@ -85,8 +85,7 @@ public class AdminMenu implements Menu {
         System.out.println("8. Listar todas las mascotas y su sonido");
         System.out.println("9. Ver el total cobrado por veterinario");
         System.out.println("10. Dar de baja una mascota");
-        System.out.println("11. Administrar empleados");
-        System.out.println("12. Salir");
+        System.out.println("11. Salir");
     }
 
     @Override
