@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/MoisesTorres24/PetCare/compare/v0.6.0...v0.6.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* fix validations ([#16](https://github.com/MoisesTorres24/PetCare/issues/16)) ([b8e4181](https://github.com/MoisesTorres24/PetCare/commit/b8e41811366690330fb944df9491eb6a7263900d))
+
 ## [0.6.0](https://github.com/MoisesTorres24/PetCare/compare/v0.5.0...v0.6.0) (2026-11-02)
 
 
