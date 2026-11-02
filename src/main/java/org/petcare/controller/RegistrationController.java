@@ -2,6 +2,8 @@ package org.petcare.controller;
 
 import org.petcare.model.clinic.Clinic;
 import org.petcare.model.person.Client;
+import org.petcare.model.person.EmployeeRole;
+import org.petcare.model.person.Veterinarian;
 import org.petcare.model.pet.Cat;
 import org.petcare.model.pet.Dog;
 import org.petcare.model.pet.ExoticBird;
@@ -23,6 +25,8 @@ public class RegistrationController {
      * Siguiente identificador disponible para una mascota.
      */
     private int nextPetId;
+    /** Siguiente identificador disponible para un veterinario. */
+    private int nextVeterinarianId;
 
     /**
      * Inicializa el controlador con la clínica que almacenará los datos.
@@ -33,6 +37,7 @@ public class RegistrationController {
         this.clinic = clinic;
         this.nextClientId = 1;
         this.nextPetId = 1;
+        this.nextVeterinarianId = 1;
     }
 
     /**
@@ -112,6 +117,36 @@ public class RegistrationController {
         client.registerPet(bird);
         nextPetId++;
         return bird;
+    }
+
+    /**
+     * Registra un veterinario y lo incorpora a la clínica.
+     *
+     * @param firstName nombre del veterinario
+     * @param lastName apellido del veterinario
+     * @param phone teléfono del veterinario
+     * @param email correo electrónico del veterinario
+     * @param license cédula profesional
+     * @param specialty especialidad médica
+     * @return veterinario recién creado
+     */
+    public Veterinarian registerVeterinarian(String firstName, String lastName, String phone,
+                                             String email, String license, String specialty) {
+        Veterinarian veterinarian = new Veterinarian(
+                nextVeterinarianId,
+                firstName,
+                lastName,
+                phone,
+                email,
+                nextVeterinarianId,
+                EmployeeRole.VETERINARIAN,
+                0,
+                license,
+                specialty
+        );
+        clinic.addVeterinarian(veterinarian);
+        nextVeterinarianId++;
+        return veterinarian;
     }
 
     /**

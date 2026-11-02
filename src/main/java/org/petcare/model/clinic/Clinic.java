@@ -2,6 +2,7 @@ package org.petcare.model.clinic;
 
 import org.petcare.model.person.Employee;
 import org.petcare.model.person.Client;
+import org.petcare.model.person.Veterinarian;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,8 @@ public class Clinic {
     private int numberOfRooms;
     /** Clientes registrados, indexados por su identificador. */
     private Map<Integer, Client> clients;
+    /** Veterinarios registrados, indexados por su identificador laboral. */
+    private Map<Integer, Veterinarian> veterinarians;
 
     /**
      * Crea una clínica con nombre y dirección.
@@ -29,6 +32,7 @@ public class Clinic {
         this.name = name;
         this.address = address;
         this.clients = new TreeMap<>();
+        this.veterinarians = new TreeMap<>();
     }
 
     /**
@@ -42,6 +46,7 @@ public class Clinic {
         this.address = "";
         this.numberOfRooms = numberOfRooms;
         this.clients = new TreeMap<>();
+        this.veterinarians = new TreeMap<>();
     }
 
     /**
@@ -79,6 +84,24 @@ public class Clinic {
      */
     public boolean hasClients() {
         return !clients.isEmpty();
+    }
+
+    /**
+     * Registra un veterinario en la clínica.
+     *
+     * @param veterinarian veterinario que se incorporará a la clínica
+     */
+    public void addVeterinarian(Veterinarian veterinarian) {
+        veterinarians.put(veterinarian.getEmployeeId(), veterinarian);
+    }
+
+    /**
+     * Obtiene los veterinarios registrados sin permitir modificaciones externas.
+     *
+     * @return colección de veterinarios registrados
+     */
+    public Collection<Veterinarian> getAllVeterinarians() {
+        return Collections.unmodifiableCollection(veterinarians.values());
     }
 
     /** Registra un empleado en la clínica cuando se implemente su almacenamiento. */
