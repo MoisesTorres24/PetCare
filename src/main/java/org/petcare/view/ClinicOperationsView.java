@@ -99,7 +99,7 @@ public class ClinicOperationsView {
     }
 
     /**
-     * Opción 9: Muestra el total cobrado por cada veterinario registrado.
+     * Opción 9: Muestra el total cobrado por cada veterinario y por cada mascota.
      */
     public void displayTotalByVeterinarian() {
         System.out.println("=== Total cobrado por veterinario ===");
@@ -107,7 +107,6 @@ public class ClinicOperationsView {
             System.out.println("No hay veterinarios registrados.");
             return;
         }
-        // Calculamos y mostramos el acumulado de cada veterinario
         for (Veterinarian vet : clinic.getAllVeterinarians()) {
             double total = operationsController
                     .calculateTotalCollectedByVeterinarian(vet.getEmployeeId());
@@ -116,6 +115,7 @@ public class ClinicOperationsView {
                     + " (" + vet.getSpecialty() + ")"
                     + " | Total cobrado: $" + total);
         }
+        printTotalsByPet();
     }
 
     /**
@@ -135,6 +135,24 @@ public class ClinicOperationsView {
                     + ") y su historial clínico fueron dados de baja exitosamente.");
         } catch (IllegalArgumentException exception) {
             System.out.println("Error: " + exception.getMessage());
+        }
+    }
+
+    /**
+     * Muestra el desglose de cobros acumulados por mascota (Regla de negocio 6).
+     */
+    private void printTotalsByPet() {
+        List<Pet> pets = operationsController.getAllPets();
+        if (pets.isEmpty()) {
+            return;
+        }
+        System.out.println("\n=== Total cobrado por mascota ===");
+        for (Pet pet : pets) {
+            double totalPet = operationsController.calculateTotalCollectedByPet(pet.getId());
+            System.out.println("ID: " + pet.getId()
+                    + " | Mascota: " + pet.getName()
+                    + " | Dueño: " + pet.getOwner().getFirstName()
+                    + " | Total cobrado: $" + totalPet);
         }
     }
 

@@ -7,6 +7,7 @@ import org.petcare.model.clinic.Receipt;
 import org.petcare.model.person.Client;
 import org.petcare.model.person.Veterinarian;
 import org.petcare.model.pet.Pet;
+import org.petcare.model.service.Billable;
 import org.petcare.model.service.Service;
 
 import java.time.LocalDate;
@@ -51,9 +52,9 @@ public class ClinicOperationsController {
             throw new IllegalArgumentException(
                     "Solo se puede generar comprobante de una cita atendida");
         }
-        // Registramos la cita en el historial de la mascota
         appointment.getPet().getHistory().addRecord(appointment);
-        double total = calculateServicesTotal(appointment.getServices());
+        List<Billable> billables = new ArrayList<>(appointment.getServices());
+        double total = calculateBillableTotal(billables);
         return new Receipt(total, LocalDate.now(), appointment.getServices());
     }
 
@@ -89,11 +90,12 @@ public class ClinicOperationsController {
     public double calculateTotalCollectedByVeterinarian(int employeeId) {
         Veterinarian vet = findVeterinarianById(employeeId);
         double total = 0.0;
-        // Sumamos únicamente los servicios de las citas atendidas de este veterinario
+        // Regla 6: Todo cobro puede consultarse por veterinario
         for (Appointment appointment : clinic.getAppointments()) {
             if (appointment.getStatus() == AppointmentStatus.COMPLETED
                     && appointment.getVeterinarian().equals(vet)) {
-                total += calculateServicesTotal(appointment.getServices());
+                List<Billable> billables = new ArrayList<>(appointment.getServices());
+                total += calculateBillableTotal(billables);
             }
         }
         return total;
@@ -109,11 +111,12 @@ public class ClinicOperationsController {
     public double calculateTotalCollectedByPet(int petId) {
         Pet pet = findPetById(petId);
         double total = 0.0;
-        // Recorremos las citas atendidas de la mascota para acumular su costo
+        // Regla 6: Todo cobro puede consultarse por mascota
         for (Appointment appointment : clinic.getAppointments()) {
             if (appointment.getStatus() == AppointmentStatus.COMPLETED
                     && appointment.getPet().equals(pet)) {
-                total += calculateServicesTotal(appointment.getServices());
+                List<Billable> billables = new ArrayList<>(appointment.getServices());
+                total += calculateBillableTotal(billables);
             }
         }
         return total;
@@ -138,10 +141,6 @@ public class ClinicOperationsController {
 
     /**
      * Busca una mascota por su identificador dentro de la clínica.
-     *
-     * @param petId identificador buscado
-     * @return mascota encontrada
-     * @throws IllegalArgumentException si no existe la mascota
      */
     public Pet findPetById(int petId) {
         for (Pet pet : clinic.getAllPets()) {
@@ -154,10 +153,6 @@ public class ClinicOperationsController {
 
     /**
      * Busca un veterinario por su número de empleado.
-     *
-     * @param employeeId identificador laboral
-     * @return veterinario encontrado
-     * @throws IllegalArgumentException si no existe el veterinario
      */
     public Veterinarian findVeterinarianById(int employeeId) {
         for (Veterinarian vet : clinic.getAllVeterinarians()) {
@@ -171,10 +166,6 @@ public class ClinicOperationsController {
 
     /**
      * Busca una cita por su identificador.
-     *
-     * @param appointmentId identificador de la cita
-     * @return cita encontrada
-     * @throws IllegalArgumentException si no existe la cita
      */
     public Appointment findAppointmentById(int appointmentId) {
         for (Appointment appointment : clinic.getAppointments()) {
@@ -187,12 +178,12 @@ public class ClinicOperationsController {
     }
 
     /**
-     * Suma polimórficamente el costo de una lista de servicios sin usar instanceof.
+     * Suma polimórficamente el costo de una lista de objetos Billable sin instanceof.
      */
-    private double calculateServicesTotal(List<Service> services) {
+    private double calculateBillableTotal(List<Billable> billables) {
         double total = 0.0;
-        for (Service service : services) {
-            double cost = service.calculateCost();
+        for (Billable item : billables) {
+            double cost = item.calculateCost();
             if (cost < 0) {
                 throw new IllegalArgumentException("El costo no puede ser negativo");
             }

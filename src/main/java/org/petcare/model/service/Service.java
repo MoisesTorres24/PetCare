@@ -5,7 +5,7 @@ import org.petcare.util.Validatable;
 /**
  * Servicio veterinario facturable.
  */
-public abstract class Service {
+public abstract class Service implements Billable {
     /**
      * Nombre visible del servicio.
      */
@@ -13,11 +13,14 @@ public abstract class Service {
 
     /**
      * Crea un servicio con un nombre obligatorio.
+     *
+     * @param name nombre del servicio
      */
     protected Service(String name) {
         setName(name);
     }
 
+    @Override
     /**
      * Calcula el costo del servicio según sus parámetros.
      */
@@ -25,6 +28,8 @@ public abstract class Service {
 
     /**
      * Obtiene el nombre del servicio.
+     *
+     * @return nombre del servicio
      */
     public String getName() {
         return name;
@@ -32,6 +37,8 @@ public abstract class Service {
 
     /**
      * Actualiza el nombre validando que no esté vacío.
+     *
+     * @param name nuevo nombre del servicio
      */
     public void setName(String name) {
         Validatable.requiredText(name, "nombre");

@@ -24,11 +24,15 @@ public class Surgery extends Service {
 
     /**
      * Crea una cirugía con duración y complejidad.
+     *
+     * @param hours           horas de quirófano
+     * @param complexityLevel nivel de complejidad
      */
     public Surgery(double hours, SurgeryComplexity complexityLevel) {
         super("Cirugía");
         setHours(hours);
-        this.complexityLevel = Objects.requireNonNull(complexityLevel, "El nivel de complejidad no puede ser nulo");
+        this.complexityLevel = Objects.requireNonNull(
+                complexityLevel, "El nivel de complejidad no puede ser nulo");
     }
 
     @Override
@@ -36,7 +40,6 @@ public class Surgery extends Service {
     public double calculateCost() {
         return hours * HOURLY_RATE * complexityLevel.getRiskMultiplier();
     }
-
 
     /**
      * Obtiene la duración de la cirugía.
@@ -46,10 +49,16 @@ public class Surgery extends Service {
     }
 
     /**
-     * Actualiza la duración validando que no sea negativa.
+     * Actualiza la duración validando que sea mayor que cero.
+     *
+     * @param hours horas de quirófano
+     * @throws IllegalArgumentException si las horas son menores o iguales a cero
      */
     public void setHours(double hours) {
         Validatable.nonNegativeDecimal(hours, "horas");
+        if (hours <= 0) {
+            throw new IllegalArgumentException("Las horas de cirugía deben ser mayores que cero");
+        }
         this.hours = hours;
     }
 
@@ -64,6 +73,7 @@ public class Surgery extends Service {
      * Actualiza la complejidad y rechaza valores nulos.
      */
     public void setComplexityLevel(SurgeryComplexity complexityLevel) {
-        this.complexityLevel = Objects.requireNonNull(complexityLevel, "El nivel de complejidad no puede ser nulo");
+        this.complexityLevel = Objects.requireNonNull(
+                complexityLevel, "El nivel de complejidad no puede ser nulo");
     }
 }

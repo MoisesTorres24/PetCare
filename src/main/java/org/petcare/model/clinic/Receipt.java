@@ -1,6 +1,7 @@
 package org.petcare.model.clinic;
 
 import org.petcare.model.service.Service;
+import org.petcare.util.Validatable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,9 +33,16 @@ public class Receipt {
     private final List<Service> services;
 
     /**
-     * Crea un comprobante y copia la lista de servicios recibida.
+     * Crea un comprobante validando que el costo total no sea negativo.
+     *
+     * @param totalAmount monto total cobrado
+     * @param issueDate   fecha de emisión
+     * @param services    lista de servicios cobrados
+     * @throws IllegalArgumentException si el monto es negativo
      */
     public Receipt(double totalAmount, LocalDate issueDate, List<Service> services) {
+        // Regla de negocio: los costos nunca pueden ser negativos
+        Validatable.nonNegativeDecimal(totalAmount, "monto total");
         receiptCounter++;
         this.receiptNumber = receiptCounter;
         this.totalAmount = totalAmount;
