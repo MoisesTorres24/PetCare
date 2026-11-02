@@ -22,7 +22,8 @@ public class Cat extends Pet {
     @Override
     /** Emite el sonido del gato. */
     public void makeSound() {
-
+        // Imprime el maullido característico del gato
+        System.out.println("¡Miau, miau!");
     }
 
     /**
@@ -37,5 +38,15 @@ public class Cat extends Pet {
      */
     public void setDomestic(boolean domestic) {
         isDomestic = domestic;
+    }
+
+    @Override
+    /** Devuelve la representación en texto de los datos del gato. */
+    public String toString() {
+        String domesticText = isDomestic ? "Sí" : "No";
+        return "ID: " + getId() + " | [Gato] Nombre: " + getName()
+                + " | Edad: " + getAge() + " años | Peso: " + getWeight()
+                + " kg | Doméstico: " + domesticText
+                + " | Dueño: " + getOwner().getFirstName() + " " + getOwner().getLastName();
     }
 }

@@ -28,7 +28,8 @@ public class Dog extends Pet {
     @Override
     /** Emite el sonido del perro. */
     public void makeSound() {
-
+        // Imprime el ladrido característico del perro
+        System.out.println("¡Guau, guau!");
     }
 
     /**
@@ -59,5 +60,14 @@ public class Dog extends Pet {
     public void setEnergyLevel(String energyLevel) {
         Validatable.requiredText(energyLevel, "nivel de energía");
         this.energyLevel = energyLevel;
+    }
+
+    @Override
+    /** Devuelve la representación en texto de los datos del perro. */
+    public String toString() {
+        return "ID: " + getId() + " | [Perro] Nombre: " + getName()
+                + " | Edad: " + getAge() + " años | Peso: " + getWeight()
+                + " kg | Raza: " + breed + " | Energía: " + energyLevel
+                + " | Dueño: " + getOwner().getFirstName() + " " + getOwner().getLastName();
     }
 }

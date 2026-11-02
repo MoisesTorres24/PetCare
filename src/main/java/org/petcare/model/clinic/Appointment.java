@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Representa una cita programada para una fecha y hora concretas. */
-public class Appointment {
+/**
+ * Representa una cita programada para una fecha y hora concretas.
+ */
+public class Appointment implements Comparable<Appointment> {
     private int id;
     private Pet pet;
     private Veterinarian veterinarian;
@@ -22,11 +24,12 @@ public class Appointment {
     /**
      * Crea una cita con sus recursos y fecha de atención.
      *
-     * @param id identificador de la cita
-     * @param pet mascota que recibirá la atención
+     * @param id           identificador de la cita
+     * @param pet          mascota que recibirá la atención
      * @param veterinarian veterinario asignado
-     * @param room consultorio reservado
-     * @param dateTime fecha y hora de la cita
+     * @param room         consultorio reservado
+     * @param dateTime     fecha y hora de la cita
+     * @param services     lista de servicios solicitados
      */
     public Appointment(int id, Pet pet, Veterinarian veterinarian,
                        ConsultingRoom room, LocalDateTime dateTime, List<Service> services) {
@@ -119,5 +122,32 @@ public class Appointment {
      */
     public void setStatus(AppointmentStatus status) {
         this.status = status;
+    }
+
+    @Override
+    /**
+     * Compara dos citas por fecha y hora para mantener el orden en TreeSet.
+     * Si la fecha es igual, desempata por el identificador de la cita.
+     *
+     * @param other otra cita a comparar
+     * @return valor negativo, cero o positivo según el orden cronológico
+     */
+    public int compareTo(Appointment other) {
+        int dateComparison = this.dateTime.compareTo(other.dateTime);
+        if (dateComparison != 0) {
+            return dateComparison;
+        }
+        return Integer.compare(this.id, other.id);
+    }
+
+    @Override
+    /** Devuelve un resumen legible de la cita. */
+    public String toString() {
+        return "Cita ID: " + id
+                + " | Fecha: " + dateTime
+                + " | Mascota: " + pet.getName()
+                + " | Veterinario: " + veterinarian.getFirstName() + " " + veterinarian.getLastName()
+                + " | Consultorio: " + room.getRoomNumber()
+                + " | Estado: " + status;
     }
 }

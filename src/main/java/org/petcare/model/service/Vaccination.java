@@ -39,7 +39,7 @@ public class Vaccination extends Service {
     @Override
     /** Calcula el costo de la vacunación. */
     public double calculateCost() {
-        return vaccineType.getCost();
+        return baseFee + vaccineType.getCost();
     }
 
     /**
