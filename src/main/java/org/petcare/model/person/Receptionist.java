@@ -14,8 +14,10 @@ public class Receptionist extends Employee {
     /**
      * Crea una recepcionista con su turno de trabajo.
      */
-    public Receptionist(int id, String firstName, String lastName, String phone, String email, int employeeId, EmployeeRole role, double baseSalary, ShiftType assignedShift) {
-        super(id, firstName, lastName, phone, email, employeeId, role, baseSalary);
+    public Receptionist(int id, String firstName, String lastName, String phone, String email,
+                        int employeeId, ShiftType assignedShift) {
+        super(id, firstName, lastName, phone, email, employeeId,
+                EmployeeRole.RECEPTIONIST, 12000.0);
         this.assignedShift = Objects.requireNonNull(assignedShift, "El turno no puede ser nulo");
     }
 

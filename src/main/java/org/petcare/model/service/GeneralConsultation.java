@@ -1,22 +1,21 @@
 package org.petcare.model.service;
 
-import org.petcare.util.Validatable;
-
 /**
  * Servicio de consulta veterinaria general.
  */
 public class GeneralConsultation extends Service {
+    private static final double FIXED_FEE = 500.0;
     /**
      * Tarifa base de la consulta.
      */
-    private double baseFee;
+    private final double baseFee;
 
     /**
-     * Crea una consulta con su tarifa base.
+     * Crea una consulta con una tarifa fija.
      */
-    public GeneralConsultation(double baseFee) {
+    public GeneralConsultation() {
         super("Consulta General");
-        setBaseFee(baseFee);
+        this.baseFee = FIXED_FEE;
     }
 
     /**
@@ -26,17 +25,9 @@ public class GeneralConsultation extends Service {
         return baseFee;
     }
 
-    /**
-     * Actualiza la tarifa base tras validar que no sea negativa.
-     */
-    public void setBaseFee(double baseFee) {
-        Validatable.nonNegativeDecimal(baseFee, "tarifa base");
-        this.baseFee = baseFee;
-    }
-
     @Override
     /** Calcula el costo de la consulta. */
     public double calculateCost() {
-        return 0;
+        return baseFee;
     }
 }

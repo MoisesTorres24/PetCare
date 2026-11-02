@@ -2,7 +2,6 @@ package org.petcare.controller;
 
 import org.petcare.model.clinic.Clinic;
 import org.petcare.model.person.Client;
-import org.petcare.model.person.EmployeeRole;
 import org.petcare.model.person.Veterinarian;
 import org.petcare.model.pet.Cat;
 import org.petcare.model.pet.Dog;
@@ -139,8 +138,6 @@ public class RegistrationController {
                 phone,
                 email,
                 nextVeterinarianId,
-                EmployeeRole.VETERINARIAN,
-                0,
                 license,
                 specialty
         );

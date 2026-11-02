@@ -113,6 +113,13 @@ public class Clinic {
      * @param veterinarian veterinario que se incorporará a la clínica
      */
     public void addVeterinarian(Veterinarian veterinarian) {
+        if (veterinarian == null) {
+            throw new IllegalArgumentException("El veterinario no puede ser nulo");
+        }
+        if (rooms.isEmpty() || veterinarians.size() >= rooms.size()) {
+            throw new IllegalArgumentException("No hay consultorios disponibles");
+        }
+        veterinarian.setConsultingRoom(getAvailableRoom());
         veterinarians.put(veterinarian.getEmployeeId(), veterinarian);
     }
 
@@ -144,8 +151,30 @@ public class Clinic {
         appointments.add(appointment);
     }
 
-    public Collection<Appointment> getAllAppointments() {
+    public Collection<Appointment> getAppointments() {
         return Collections.unmodifiableCollection(appointments);
+    }
+
+    public Collection<Appointment> getAllAppointments() {
+        return getAppointments();
+    }
+
+    private ConsultingRoom getAvailableRoom() {
+        for (ConsultingRoom room : rooms.values()) {
+            if (!isRoomAssigned(room)) {
+                return room;
+            }
+        }
+        throw new IllegalArgumentException("No hay consultorios disponibles");
+    }
+
+    private boolean isRoomAssigned(ConsultingRoom room) {
+        for (Veterinarian veterinarian : veterinarians.values()) {
+            if (room.equals(veterinarian.getConsultingRoom())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Registra un empleado en la clínica cuando se implemente su almacenamiento. */

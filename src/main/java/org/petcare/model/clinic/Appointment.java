@@ -2,14 +2,19 @@ package org.petcare.model.clinic;
 
 import org.petcare.model.person.Veterinarian;
 import org.petcare.model.pet.Pet;
+import org.petcare.model.service.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /** Representa una cita programada para una fecha y hora concretas. */
 public class Appointment {
     private int id;
     private Pet pet;
     private Veterinarian veterinarian;
+    private List<Service> services;
     private ConsultingRoom room;
     private LocalDateTime dateTime;
     private AppointmentStatus status;
@@ -24,12 +29,13 @@ public class Appointment {
      * @param dateTime fecha y hora de la cita
      */
     public Appointment(int id, Pet pet, Veterinarian veterinarian,
-                       ConsultingRoom room, LocalDateTime dateTime) {
+                       ConsultingRoom room, LocalDateTime dateTime, List<Service> services) {
         this.id = id;
         this.pet = pet;
         this.veterinarian = veterinarian;
         this.room = room;
         this.dateTime = dateTime;
+        this.services = new ArrayList<>(services);
         this.status = AppointmentStatus.SCHEDULED;
     }
 
@@ -65,6 +71,19 @@ public class Appointment {
 
     public ConsultingRoom getRoom() {
         return room;
+    }
+
+    public List<Service> getServices() {
+        return Collections.unmodifiableList(services);
+    }
+
+    /**
+     * Actualiza los servicios de la cita.
+     *
+     * @param services nuevos servicios
+     */
+    public void setServices(List<Service> services) {
+        this.services = new ArrayList<>(services);
     }
 
     /**

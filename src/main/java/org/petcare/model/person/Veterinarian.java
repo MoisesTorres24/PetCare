@@ -1,5 +1,6 @@
 package org.petcare.model.person;
 
+import org.petcare.model.clinic.ConsultingRoom;
 import org.petcare.util.Validatable;
 
 /**
@@ -14,12 +15,15 @@ public class Veterinarian extends Employee {
      * Área de especialidad médica.
      */
     private String specialty;
+    private ConsultingRoom consultingRoom;
 
     /**
      * Crea un veterinario con licencia y especialidad.
      */
-    public Veterinarian(int id, String firstName, String lastName, String phone, String email, int employeeId, EmployeeRole role, double baseSalary, String medicalLicense, String specialty) {
-        super(id, firstName, lastName, phone, email, employeeId, role, baseSalary);
+    public Veterinarian(int id, String firstName, String lastName, String phone, String email,
+                        int employeeId, String medicalLicense, String specialty) {
+        super(id, firstName, lastName, phone, email, employeeId,
+                EmployeeRole.VETERINARIAN, 25000.0);
         setMedicalLicense(medicalLicense);
         setSpecialty(specialty);
     }
@@ -52,5 +56,21 @@ public class Veterinarian extends Employee {
     public void setSpecialty(String specialty) {
         Validatable.requiredText(specialty, "especialidad");
         this.specialty = specialty;
+    }
+
+    public ConsultingRoom getConsultingRoom() {
+        return consultingRoom;
+    }
+
+    /**
+     * Asigna el consultorio fijo del veterinario.
+     *
+     * @param consultingRoom consultorio asignado
+     */
+    public void setConsultingRoom(ConsultingRoom consultingRoom) {
+        if (consultingRoom == null) {
+            throw new IllegalArgumentException("El consultorio no puede ser nulo");
+        }
+        this.consultingRoom = consultingRoom;
     }
 }
