@@ -12,15 +12,30 @@ public class AdminMenu implements Menu {
     private static final int EXIT_OPTION = 11;
     private final RegistrationView registrationHelper;
     private final AppointmentView appointmentView;
+    private final ClinicOperationsView operationsView;
     private final Scanner scanner;
 
     /**
-     * Crea el menú y conecta sus utilidades de registro con la entrada.
+     * Crea el menú básico con registro y citas.
      */
     public AdminMenu(RegistrationController controller, AppointmentView appointmentView,
                      Scanner scanner) {
+        this(controller, appointmentView, null, scanner);
+    }
+
+    /**
+     * Crea el menú completo conectando todas las vistas del sistema.
+     *
+     * @param controller      controlador de registros
+     * @param appointmentView vista de citas
+     * @param operationsView  vista de operaciones de clínica (opciones 6 a 10)
+     * @param scanner         lector de consola
+     */
+    public AdminMenu(RegistrationController controller, AppointmentView appointmentView,
+                     ClinicOperationsView operationsView, Scanner scanner) {
         this.registrationHelper = new RegistrationView(controller, scanner);
         this.appointmentView = appointmentView;
+        this.operationsView = operationsView;
         this.scanner = scanner;
     }
 
@@ -31,45 +46,51 @@ public class AdminMenu implements Menu {
         do {
             showOptions();
             option = readUserInput();
-            // Cada opción delega el flujo especializado o informa su disponibilidad.
-            switch (option) {
-                case 1:
-                    registrationHelper.registerClientWithPet();
-                    break;
-                case 2:
-                    registrationHelper.registerPetToExistingClient();
-                    break;
-                case 3:
-                    registrationHelper.registerVeterinarian();
-                    break;
-                case 4:
-                    appointmentView.displayScheduleAppointment();
-                    break;
-                case 5:
-                    appointmentView.displayManageAppointment();
-                    break;
-                case 6:
-                    System.out.println("Generación del comprobante.");
-                    break;
-                case 7:
-                    System.out.println("Consulta del historial clínico.");
-                    break;
-                case 8:
-                    System.out.println("Listado de mascotas y sonidos.");
-                    break;
-                case 9:
-                    System.out.println("Consulta del total cobrado por veterinario.");
-                    break;
-                case 10:
-                    System.out.println("Baja de mascota.");
-                    break;
-                case EXIT_OPTION:
-                    System.out.println("Saliendo del sistema...");
-                    break;
-                default:
-                    System.out.println("Opción no reconocida.");
-            }
+            executeOption(option);
         } while (option != EXIT_OPTION);
+    }
+
+    /**
+     * Ejecuta la opción seleccionada por el usuario delegando a la vista correspondiente.
+     */
+    private void executeOption(int option) {
+        switch (option) {
+            case 1:
+                registrationHelper.registerClientWithPet();
+                break;
+            case 2:
+                registrationHelper.registerPetToExistingClient();
+                break;
+            case 3:
+                registrationHelper.registerVeterinarian();
+                break;
+            case 4:
+                appointmentView.displayScheduleAppointment();
+                break;
+            case 5:
+                appointmentView.displayManageAppointment();
+                break;
+            case 6:
+                operationsView.displayGenerateReceipt();
+                break;
+            case 7:
+                operationsView.displayMedicalHistory();
+                break;
+            case 8:
+                operationsView.displayPetsAndSounds();
+                break;
+            case 9:
+                operationsView.displayTotalByVeterinarian();
+                break;
+            case 10:
+                operationsView.displayRemovePet();
+                break;
+            case EXIT_OPTION:
+                System.out.println("Saliendo del sistema...");
+                break;
+            default:
+                System.out.println("Opción no reconocida.");
+        }
     }
 
     private void showOptions() {
