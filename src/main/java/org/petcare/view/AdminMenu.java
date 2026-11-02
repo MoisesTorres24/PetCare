@@ -37,7 +37,7 @@ public class AdminMenu implements Menu {
                     registrationHelper.registerPetToExistingClient();
                     break;
                 case 3:
-                    System.out.println("Registro y asignación de veterinario.");
+                    registrationHelper.registerVeterinarian();
                     break;
                 case 4:
                     System.out.println("Agendamiento de cita.");

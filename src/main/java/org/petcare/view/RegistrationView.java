@@ -2,6 +2,7 @@ package org.petcare.view;
 
 import org.petcare.controller.RegistrationController;
 import org.petcare.model.person.Client;
+import org.petcare.model.person.Veterinarian;
 import org.petcare.model.pet.Pet;
 import org.petcare.util.InputHelper;
 
@@ -78,6 +79,27 @@ public class RegistrationView {
             int petType = readPetType();
             Pet pet = registerPet(clientId, petType);
             System.out.println("Mascota registrada exitosamente con ID: " + pet.getId());
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Error: " + exception.getMessage());
+        }
+    }
+
+    /**
+     * Captura los datos y registra un veterinario en la clínica.
+     */
+    public void registerVeterinarian() {
+        try {
+            System.out.println("=== Registrando veterinario ===");
+            Veterinarian veterinarian = controller.registerVeterinarian(
+                    InputHelper.readText(scanner, "Nombre"),
+                    InputHelper.readText(scanner, "Apellido"),
+                    InputHelper.readText(scanner, "Teléfono"),
+                    InputHelper.readText(scanner, "Correo"),
+                    InputHelper.readText(scanner, "Cédula profesional"),
+                    InputHelper.readText(scanner, "Especialidad")
+            );
+            System.out.println("Veterinario registrado exitosamente con ID: "
+                    + veterinarian.getEmployeeId());
         } catch (IllegalArgumentException exception) {
             System.out.println("Error: " + exception.getMessage());
         }

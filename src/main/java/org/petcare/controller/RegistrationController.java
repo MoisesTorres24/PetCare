@@ -1,21 +1,22 @@
 package org.petcare.controller;
 
+import org.petcare.model.clinic.Clinic;
 import org.petcare.model.person.Client;
+import org.petcare.model.person.EmployeeRole;
+import org.petcare.model.person.Veterinarian;
 import org.petcare.model.pet.Cat;
 import org.petcare.model.pet.Dog;
 import org.petcare.model.pet.ExoticBird;
 
-import java.util.*;
+import java.util.Collection;
 
 /**
  * Controlador principal de la clínica veterinaria.
  * Gestiona colecciones y flujos de negocio sin interactuar con la consola.
  */
 public class RegistrationController {
-    /**
-     * Clientes registrados, indexados por su identificador.
-     */
-    private TreeMap<Integer, Client> clients;
+    /** Clínica que centraliza los clientes registrados. */
+    private Clinic clinic;
     /**
      * Siguiente identificador disponible para un cliente.
      */
@@ -24,46 +25,63 @@ public class RegistrationController {
      * Siguiente identificador disponible para una mascota.
      */
     private int nextPetId;
+    /** Siguiente identificador disponible para un veterinario. */
+    private int nextVeterinarianId;
 
     /**
-     * Inicializa las colecciones y los contadores de identificadores.
+     * Inicializa el controlador con la clínica que almacenará los datos.
+     *
+     * @param clinic clínica donde se registrarán los clientes y sus mascotas
      */
-    public RegistrationController() {
-        this.clients = new TreeMap<>();
+    public RegistrationController(Clinic clinic) {
+        this.clinic = clinic;
         this.nextClientId = 1;
         this.nextPetId = 1;
+        this.nextVeterinarianId = 1;
     }
 
     /**
-     * Indica si existe al menos un cliente registrado.
+     * Indica si existe al menos un cliente registrado en la clínica.
+     *
+     * @return {@code true} cuando la clínica tiene clientes
      */
     public boolean hasClients() {
-        return !clients.isEmpty();
+        return clinic.hasClients();
     }
 
     /**
      * Busca un cliente por su identificador.
+     *
+     * @param id identificador del cliente
+     * @return cliente encontrado o {@code null} si no existe
      */
     public Client findClientById(int id) {
-        return clients.get(id);
+        return clinic.getClientById(id);
     }
 
     /**
      * Devuelve una vista de solo lectura de los clientes registrados.
+     *
+     * @return colección de clientes de la clínica
      */
     public Collection<Client> getAllClients() {
-        return Collections.unmodifiableCollection(clients.values());
+        return clinic.getAllClients();
     }
 
 
     /**
      * Registra un nuevo cliente en el sistema.
      *
+     * @param firstName nombre del cliente
+     * @param lastName apellido del cliente
+     * @param phone teléfono del cliente
+     * @param email correo electrónico del cliente
+     * @param address domicilio del cliente
      * @return El cliente recién creado.
      */
     public Client registerClient(String firstName, String lastName, String phone, String email, String address) {
         Client client = new Client(nextClientId, firstName, lastName, phone, email, address);
-        clients.put(client.getId(), client);
+        clinic.addClient(client);
         nextClientId++;
         return client;
     }
@@ -101,8 +119,45 @@ public class RegistrationController {
         return bird;
     }
 
+    /**
+     * Registra un veterinario y lo incorpora a la clínica.
+     *
+     * @param firstName nombre del veterinario
+     * @param lastName apellido del veterinario
+     * @param phone teléfono del veterinario
+     * @param email correo electrónico del veterinario
+     * @param license cédula profesional
+     * @param specialty especialidad médica
+     * @return veterinario recién creado
+     */
+    public Veterinarian registerVeterinarian(String firstName, String lastName, String phone,
+                                             String email, String license, String specialty) {
+        Veterinarian veterinarian = new Veterinarian(
+                nextVeterinarianId,
+                firstName,
+                lastName,
+                phone,
+                email,
+                nextVeterinarianId,
+                EmployeeRole.VETERINARIAN,
+                0,
+                license,
+                specialty
+        );
+        clinic.addVeterinarian(veterinarian);
+        nextVeterinarianId++;
+        return veterinarian;
+    }
+
+    /**
+     * Obtiene un cliente existente o informa que el identificador no es válido.
+     *
+     * @param clientId identificador del cliente requerido
+     * @return cliente encontrado
+     * @throws IllegalArgumentException si no existe el cliente
+     */
     private Client getRequiredClient(int clientId) {
-        Client client = clients.get(clientId);
+        Client client = clinic.getClientById(clientId);
         if (client == null) {
             throw new IllegalArgumentException("No existe un dueño con el ID " + clientId);
         }
