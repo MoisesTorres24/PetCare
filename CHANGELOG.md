@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/MoisesTorres24/PetCare/compare/v0.6.4...v1.0.0) (2026-11-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* prepare first stable release ([#24](https://github.com/MoisesTorres24/PetCare/issues/24))
+
+### Features
+
+* prepare first stable release ([#24](https://github.com/MoisesTorres24/PetCare/issues/24)) ([e335bc6](https://github.com/MoisesTorres24/PetCare/commit/e335bc63999a7009390655423e0a5d5762397525))
+
 ## [0.6.4](https://github.com/MoisesTorres24/PetCare/compare/v0.6.3...v0.6.4) (2026-11-03)
 
 
