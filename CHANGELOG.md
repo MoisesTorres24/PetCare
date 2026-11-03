@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.4](https://github.com/MoisesTorres24/PetCare/compare/v0.6.3...v0.6.4) (2026-11-03)
+
+
+### Documentation
+
+* create README content ([#22](https://github.com/MoisesTorres24/PetCare/issues/22)) ([7b5ddd6](https://github.com/MoisesTorres24/PetCare/commit/7b5ddd6233b5ab789fa6486d8f02710dcadb8416))
+
 ## [0.6.3](https://github.com/MoisesTorres24/PetCare/compare/v0.6.2...v0.6.3) (2026-11-03)
 
 
