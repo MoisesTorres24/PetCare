@@ -20,7 +20,7 @@ public class Main {
      *
      * @param args argumentos recibidos desde la línea de comandos
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Clinic petCareClinic = new Clinic("PetCare", 5);
 

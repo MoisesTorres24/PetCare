@@ -11,7 +11,7 @@ public class MedicalHistory {
     /**
      * Citas ordenadas para facilitar la consulta cronológica.
      */
-    private TreeSet<Appointment> appointments = new TreeSet<>();
+    private final TreeSet<Appointment> appointments = new TreeSet<>();
 
     /**
      * Añade una cita al historial clínico validando que no sea nula.

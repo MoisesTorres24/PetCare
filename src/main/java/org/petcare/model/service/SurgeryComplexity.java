@@ -11,7 +11,7 @@ public enum SurgeryComplexity {
     /**
      * Multiplicador aplicado por el nivel de riesgo.
      */
-    private double riskMultiplier;
+    private final double riskMultiplier;
 
     /**
      * Crea un nivel con su multiplicador de riesgo.

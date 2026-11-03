@@ -15,7 +15,7 @@ import java.util.Collection;
  */
 public class RegistrationController {
     /** Clínica que centraliza los clientes registrados. */
-    private Clinic clinic;
+    private final Clinic clinic;
     /**
      * Siguiente identificador disponible para un cliente.
      */

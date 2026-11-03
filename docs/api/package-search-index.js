@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"l":"org.petcare.app"},{"l":"org.petcare.controller"},{"l":"org.petcare.model.clinic"},{"l":"org.petcare.model.person"},{"l":"org.petcare.model.pet"},{"l":"org.petcare.model.service"},{"l":"org.petcare.util"},{"l":"org.petcare.view"}];updateSearchResults();

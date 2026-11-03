@@ -13,7 +13,7 @@ import java.util.List;
  * Representa una cita programada para una fecha y hora concretas.
  */
 public class Appointment implements Comparable<Appointment> {
-    private int id;
+    private final int id;
     private Pet pet;
     private Veterinarian veterinarian;
     private List<Service> services;

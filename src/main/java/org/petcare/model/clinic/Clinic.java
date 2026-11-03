@@ -21,9 +21,9 @@ public class Clinic {
     /** Consultorios disponibles en la clínica. */
     private int numberOfRooms;
     /** Clientes registrados, indexados por su identificador. */
-    private Map<Integer, Client> clients;
+    private final Map<Integer, Client> clients;
     /** Veterinarios registrados, indexados por su identificador laboral. */
-    private Map<Integer, Veterinarian> veterinarians;
+    private final Map<Integer, Veterinarian> veterinarians;
     /** Consultorios disponibles en la clínica. */
     private Map<String, ConsultingRoom> rooms;
     /** Citas registradas en la clínica. */
