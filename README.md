@@ -430,6 +430,6 @@ Este proyecto se distribuye bajo la licencia **MIT**. Puedes cosultarla en: [`LI
 
 ## Autor
 
-- **Nombre:** Moises Gerónimo Torres González -->
+- **Nombre:** Moises Gerónimo Torres González
 - **GitHub:** [@MoisesTorres24](https://github.com/MoisesTorres24)
 - **Repositorio:** <https://github.com/MoisesTorres24/PetCare>
