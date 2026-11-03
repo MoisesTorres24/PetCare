@@ -25,8 +25,8 @@ public class GeneralConsultation extends Service {
         return baseFee;
     }
 
-    @Override
     /** Calcula el costo de la consulta. */
+    @Override
     public double calculateCost() {
         return baseFee;
     }

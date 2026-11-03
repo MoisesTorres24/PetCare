@@ -42,10 +42,12 @@ public class Appointment implements Comparable<Appointment> {
         this.status = AppointmentStatus.SCHEDULED;
     }
 
+    /** @return identificador único de la cita. */
     public int getId() {
         return id;
     }
 
+    /** @return mascota asociada a la cita. */
     public Pet getPet() {
         return pet;
     }
@@ -62,6 +64,7 @@ public class Appointment implements Comparable<Appointment> {
         this.pet = pet;
     }
 
+    /** @return veterinario asignado a la cita. */
     public Veterinarian getVeterinarian() {
         return veterinarian;
     }
@@ -78,10 +81,12 @@ public class Appointment implements Comparable<Appointment> {
         this.veterinarian = veterinarian;
     }
 
+    /** @return consultorio reservado para la cita. */
     public ConsultingRoom getRoom() {
         return room;
     }
 
+    /** @return servicios de la cita en una vista no modificable. */
     public List<Service> getServices() {
         return Collections.unmodifiableList(services);
     }
@@ -110,6 +115,7 @@ public class Appointment implements Comparable<Appointment> {
         this.room = room;
     }
 
+    /** @return fecha y hora programadas. */
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -126,6 +132,7 @@ public class Appointment implements Comparable<Appointment> {
         this.dateTime = dateTime;
     }
 
+    /** @return estado actual de la cita. */
     public AppointmentStatus getStatus() {
         return status;
     }
@@ -157,13 +164,13 @@ public class Appointment implements Comparable<Appointment> {
         }
     }
 
-    @Override
     /**
      * Compara dos citas por fecha y hora para mantener el orden en TreeSet.
      *
      * @param other otra cita a comparar
      * @return valor negativo, cero o positivo según el orden cronológico
      */
+    @Override
     public int compareTo(Appointment other) {
         int dateComparison = this.dateTime.compareTo(other.dateTime);
         if (dateComparison != 0) {
@@ -172,8 +179,8 @@ public class Appointment implements Comparable<Appointment> {
         return Integer.compare(this.id, other.id);
     }
 
-    @Override
     /** Devuelve un resumen legible de la cita. */
+    @Override
     public String toString() {
         return "Cita ID: " + id
                 + " | Fecha: " + dateTime

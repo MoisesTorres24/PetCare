@@ -21,9 +21,8 @@ public class Receptionist extends Employee {
         this.assignedShift = Objects.requireNonNull(assignedShift, "El turno no puede ser nulo");
     }
 
-    /**
-     * Obtiene el turno asignado.
-     */
+    /** Obtiene el turno asignado. */
+    /** @return turno laboral asignado. */
     public ShiftType getAssignedShift() {
         return assignedShift;
     }

@@ -44,8 +44,11 @@ public class Client extends Person {
         this.address = address;
     }
 
+    /** Devuelve las mascotas registradas para este cliente. */
     /**
-     * Devuelve las mascotas registradas para este cliente.
+     * Devuelve la lista mutable de mascotas asociadas para permitir su gestión.
+     *
+     * @return mascotas del cliente
      */
     public List<Pet> getPets() {
         return pets;

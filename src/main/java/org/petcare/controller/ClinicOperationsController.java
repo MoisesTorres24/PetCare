@@ -90,7 +90,7 @@ public class ClinicOperationsController {
     public double calculateTotalCollectedByVeterinarian(int employeeId) {
         Veterinarian vet = findVeterinarianById(employeeId);
         double total = 0.0;
-        // Regla 6: Todo cobro puede consultarse por veterinario
+        // Todo cobro puede consultarse por veterinario
         for (Appointment appointment : clinic.getAppointments()) {
             if (appointment.getStatus() == AppointmentStatus.COMPLETED
                     && appointment.getVeterinarian().equals(vet)) {
@@ -111,7 +111,7 @@ public class ClinicOperationsController {
     public double calculateTotalCollectedByPet(int petId) {
         Pet pet = findPetById(petId);
         double total = 0.0;
-        // Regla 6: Todo cobro puede consultarse por mascota
+        // Todo cobro puede consultarse por mascota
         for (Appointment appointment : clinic.getAppointments()) {
             if (appointment.getStatus() == AppointmentStatus.COMPLETED
                     && appointment.getPet().equals(pet)) {

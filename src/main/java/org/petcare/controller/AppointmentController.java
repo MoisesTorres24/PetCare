@@ -44,11 +44,11 @@ public class AppointmentController {
     public Appointment scheduleAppointment(Pet pet, Veterinarian vet,
                                            LocalDateTime dateTime, List<Service> services) {
         validateData(pet, vet, dateTime, services);
-        // Regla 2: Un veterinario no puede tener dos citas programadas a la misma hora
+        // Un veterinario no puede tener dos citas programadas a la misma hora
         if (!isVetAvailable(vet, dateTime)) {
             throw new IllegalArgumentException("El veterinario ya tiene una cita a esa hora");
         }
-        // Regla 4: Un consultorio no puede usarse en dos citas al mismo tiempo
+        // Un consultorio no puede usarse en dos citas al mismo tiempo
         if (!isRoomAvailable(vet.getConsultingRoom(), dateTime)) {
             throw new IllegalArgumentException(
                     "El consultorio ya está ocupado en otra cita a esa misma hora");
@@ -105,6 +105,15 @@ public class AppointmentController {
         return result;
     }
 
+    /**
+     * Valida que los datos mínimos de una cita estén presentes y que el
+     * veterinario tenga consultorio asignado.
+     *
+     * @param pet mascota que recibirá el servicio
+     * @param vet veterinario responsable
+     * @param dateTime fecha y hora solicitadas
+     * @param services servicios incluidos en la cita
+     */
     private void validateData(Pet pet, Veterinarian vet,
                               LocalDateTime dateTime, List<Service> services) {
         if (pet == null || vet == null || dateTime == null
@@ -116,6 +125,13 @@ public class AppointmentController {
         }
     }
 
+    /**
+     * Comprueba que el veterinario no tenga otra cita programada en el horario.
+     *
+     * @param vet veterinario que se desea reservar
+     * @param dateTime fecha y hora que se desea reservar
+     * @return {@code true} si el veterinario está disponible
+     */
     private boolean isVetAvailable(Veterinarian vet, LocalDateTime dateTime) {
         for (Appointment appointment : clinic.getAppointments()) {
             if (appointment.getStatus() == AppointmentStatus.SCHEDULED
@@ -127,6 +143,13 @@ public class AppointmentController {
         return true;
     }
 
+    /**
+     * Comprueba que el consultorio no esté ocupado en el horario indicado.
+     *
+     * @param room consultorio que se desea reservar
+     * @param dateTime fecha y hora que se desea reservar
+     * @return {@code true} si el consultorio está disponible
+     */
     private boolean isRoomAvailable(ConsultingRoom room, LocalDateTime dateTime) {
         for (Appointment appointment : clinic.getAppointments()) {
             if (appointment.getStatus() == AppointmentStatus.SCHEDULED
@@ -138,6 +161,12 @@ public class AppointmentController {
         return true;
     }
 
+    /**
+     * Valida las transiciones de estado permitidas para una cita.
+     *
+     * @param appointment cita cuyo estado cambiará
+     * @param newStatus nuevo estado solicitado
+     */
     private void validateStatus(Appointment appointment, AppointmentStatus newStatus) {
         if (newStatus == null) {
             throw new IllegalArgumentException("El estado no puede ser nulo");
