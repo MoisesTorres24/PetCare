@@ -35,8 +35,8 @@ public class Surgery extends Service {
                 complexityLevel, "El nivel de complejidad no puede ser nulo");
     }
 
-    @Override
     /** Calcula el costo multiplicando horas, tarifa y riesgo. */
+    @Override
     public double calculateCost() {
         return hours * HOURLY_RATE * complexityLevel.getRiskMultiplier();
     }

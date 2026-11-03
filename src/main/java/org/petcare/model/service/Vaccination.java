@@ -40,8 +40,8 @@ public class Vaccination extends Service {
                 vaccineType, "El tipo de vacuna no puede ser nulo");
     }
 
-    @Override
     /** Calcula el costo sumando la tarifa base y el costo de la vacuna. */
+    @Override
     public double calculateCost() {
         // Regla de negocio: la vacunación suma el costo de la vacuna a la tarifa base
         return baseFee + vaccineType.getCost();

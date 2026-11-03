@@ -19,8 +19,8 @@ public class Cat extends Pet {
         this.isDomestic = isDomestic;
     }
 
-    @Override
     /** Emite el sonido del gato. */
+    @Override
     public void makeSound() {
         // Imprime el maullido característico del gato
         System.out.println("¡Miau, miau!");
@@ -35,13 +35,15 @@ public class Cat extends Pet {
 
     /**
      * Actualiza la clasificación de domesticidad.
+     *
+     * @param domestic nuevo valor de domesticidad
      */
     public void setDomestic(boolean domestic) {
         isDomestic = domestic;
     }
 
-    @Override
     /** Devuelve la representación en texto de los datos del gato. */
+    @Override
     public String toString() {
         String domesticText = isDomestic ? "Sí" : "No";
         return "ID: " + getId() + " | [Gato] Nombre: " + getName()

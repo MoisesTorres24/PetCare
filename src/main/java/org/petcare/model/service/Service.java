@@ -20,10 +20,12 @@ public abstract class Service implements Billable {
         setName(name);
     }
 
-    @Override
     /**
-     * Calcula el costo del servicio según sus parámetros.
+     * Calcula el costo final del servicio según sus reglas de negocio.
+     *
+     * @return costo del servicio
      */
+    @Override
     public abstract double calculateCost();
 
     /**

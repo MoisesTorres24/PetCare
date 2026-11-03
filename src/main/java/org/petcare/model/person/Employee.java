@@ -29,9 +29,8 @@ public abstract class Employee extends Person {
         setBaseSalary(baseSalary);
     }
 
-    /**
-     * Obtiene el identificador laboral.
-     */
+    /** Obtiene el identificador laboral. */
+    /** @return identificador laboral del empleado. */
     public int getEmployeeId() {
         return employeeId;
     }
@@ -43,9 +42,8 @@ public abstract class Employee extends Person {
         this.employeeId = employeeId;
     }
 
-    /**
-     * Obtiene el rol del empleado.
-     */
+    /** Obtiene el rol del empleado. */
+    /** @return rol desempeñado por el empleado. */
     public EmployeeRole getRole() {
         return role;
     }
@@ -57,9 +55,8 @@ public abstract class Employee extends Person {
         this.role = role;
     }
 
-    /**
-     * Obtiene el sueldo base.
-     */
+    /** Obtiene el sueldo base. */
+    /** @return sueldo base del empleado. */
     public double getBaseSalary() {
         return baseSalary;
     }

@@ -41,15 +41,15 @@ public class ExoticBird extends Pet {
         this.wingSpan = wingSpan;
     }
 
-    @Override
     /** Emite el sonido del ave exótica. */
+    @Override
     public void makeSound() {
         // Imprime el canto característico del ave exótica
         System.out.println("¡Pío, pío, trino exótico!");
     }
 
-    @Override
     /** Devuelve la representación en texto de los datos del ave exótica. */
+    @Override
     public String toString() {
         return "ID: " + getId() + " | [Ave Exótica] Nombre: " + getName()
                 + " | Edad: " + getAge() + " años | Peso: " + getWeight()

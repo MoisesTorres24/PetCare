@@ -47,7 +47,7 @@ public abstract class Pet {
     }
 
     /**
-     * Emite el sonido propio de la especie concreta.
+     * Emite el sonido característico de la especie.
      */
     public abstract void makeSound();
 

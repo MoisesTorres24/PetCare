@@ -59,11 +59,19 @@ public class Clinic {
         initializeRooms(numberOfRooms);
     }
 
+    /**
+     * Inicializa las colecciones que almacenan recursos y citas de la clínica.
+     */
     private void initializeCollections() {
         this.rooms = new TreeMap<>();
         this.appointments = new ArrayList<>();
     }
 
+    /**
+     * Crea los consultorios numerados solicitados por la clínica.
+     *
+     * @param numberOfRooms cantidad de consultorios a crear
+     */
     private void initializeRooms(int numberOfRooms) {
         for (int roomId = 1; roomId <= numberOfRooms; roomId++) {
             addRoom(new ConsultingRoom(String.valueOf(roomId)));
@@ -132,6 +140,11 @@ public class Clinic {
         return Collections.unmodifiableCollection(veterinarians.values());
     }
 
+    /**
+     * Reúne las mascotas de todos los clientes registrados.
+     *
+     * @return colección no modificable de mascotas
+     */
     public Collection<Pet> getAllPets() {
         List<Pet> pets = new ArrayList<>();
         for (Client client : clients.values()) {
@@ -140,10 +153,21 @@ public class Clinic {
         return Collections.unmodifiableCollection(pets);
     }
 
+    /**
+     * Obtiene los consultorios registrados.
+     *
+     * @return colección no modificable de consultorios
+     */
     public Collection<ConsultingRoom> getAllRooms() {
         return Collections.unmodifiableCollection(rooms.values());
     }
 
+    /**
+     * Agrega una cita a la agenda de la clínica.
+     *
+     * @param appointment cita que se incorporará
+     * @throws IllegalArgumentException si la cita es nula
+     */
     public void addAppointment(Appointment appointment) {
         if (appointment == null) {
             throw new IllegalArgumentException("La cita no puede ser nula");
@@ -151,14 +175,30 @@ public class Clinic {
         appointments.add(appointment);
     }
 
+    /**
+     * Obtiene la agenda sin permitir modificaciones estructurales externas.
+     *
+     * @return citas registradas
+     */
     public Collection<Appointment> getAppointments() {
         return Collections.unmodifiableCollection(appointments);
     }
 
+    /**
+     * Alias para obtener todas las citas registradas.
+     *
+     * @return citas registradas
+     */
     public Collection<Appointment> getAllAppointments() {
         return getAppointments();
     }
 
+    /**
+     * Localiza el primer consultorio que aún no está asignado a un veterinario.
+     *
+     * @return consultorio disponible
+     * @throws IllegalArgumentException si no hay consultorios libres
+     */
     private ConsultingRoom getAvailableRoom() {
         for (ConsultingRoom room : rooms.values()) {
             if (!isRoomAssigned(room)) {
@@ -168,6 +208,12 @@ public class Clinic {
         throw new IllegalArgumentException("No hay consultorios disponibles");
     }
 
+    /**
+     * Comprueba si un consultorio ya está asignado a un veterinario.
+     *
+     * @param room consultorio que se desea comprobar
+     * @return {@code true} si ya tiene un veterinario asignado
+     */
     private boolean isRoomAssigned(ConsultingRoom room) {
         for (Veterinarian veterinarian : veterinarians.values()) {
             if (room.equals(veterinarian.getConsultingRoom())) {
@@ -177,11 +223,21 @@ public class Clinic {
         return false;
     }
 
-    /** Registra un empleado en la clínica cuando se implemente su almacenamiento. */
+    /**
+     * Punto de extensión para registrar empleados genéricos.
+     *
+     * @param employee empleado que se desea registrar
+     */
     public void addEmployee(Employee employee) {
 
     }
 
+    /**
+     * Agrega un consultorio usando su número como identificador.
+     *
+     * @param room consultorio que se incorporará
+     * @throws IllegalArgumentException si el consultorio es nulo
+     */
     public void addRoom(ConsultingRoom room) {
         if (room == null) {
             throw new IllegalArgumentException("El consultorio no puede ser nulo");

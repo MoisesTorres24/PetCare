@@ -82,22 +82,23 @@ public class Receipt {
         return receiptCounter;
     }
 
-    /**
-     * Obtiene el importe total.
-     */
+    /** Obtiene el importe total. */
     public double getTotalAmount() {
         return totalAmount;
     }
 
-    /**
-     * Obtiene la fecha de emisión.
-     */
+    /** Obtiene la fecha de emisión. */
     public LocalDate getIssueDate() {
         return issueDate;
     }
 
     /**
      * Obtiene los servicios incluidos.
+     */
+    /**
+     * Obtiene los servicios incluidos en el comprobante.
+     *
+     * @return servicios del comprobante
      */
     public List<Service> getServices() {
         return services;

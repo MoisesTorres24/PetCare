@@ -15,6 +15,7 @@ public class Veterinarian extends Employee {
      * Área de especialidad médica.
      */
     private String specialty;
+    /** Consultorio fijo asignado para atender citas. */
     private ConsultingRoom consultingRoom;
 
     /**
@@ -58,6 +59,7 @@ public class Veterinarian extends Employee {
         this.specialty = specialty;
     }
 
+    /** @return consultorio asignado al veterinario. */
     public ConsultingRoom getConsultingRoom() {
         return consultingRoom;
     }

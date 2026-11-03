@@ -39,8 +39,8 @@ public class AdminMenu implements Menu {
         this.scanner = scanner;
     }
 
-    @Override
     /** Muestra opciones y ejecuta la acción elegida hasta salir. */
+    @Override
     public void displayOptions() {
         int option;
         do {
@@ -93,6 +93,9 @@ public class AdminMenu implements Menu {
         }
     }
 
+    /**
+     * Imprime las opciones disponibles del menú principal.
+     */
     private void showOptions() {
         // La opción 2 registra mascotas de dueños que ya existen.
         System.out.println("\n===== MENÚ PRINCIPAL =====");
@@ -109,8 +112,8 @@ public class AdminMenu implements Menu {
         System.out.println("11. Salir");
     }
 
-    @Override
     /** Lee una opción válida dentro del rango del menú. */
+    @Override
     public int readUserInput() {
         return InputHelper.readOption(scanner, EXIT_OPTION);
     }

@@ -25,8 +25,8 @@ public class Dog extends Pet {
         setEnergyLevel(energyLevel);
     }
 
-    @Override
     /** Emite el sonido del perro. */
+    @Override
     public void makeSound() {
         // Imprime el ladrido característico del perro
         System.out.println("¡Guau, guau!");
@@ -62,8 +62,8 @@ public class Dog extends Pet {
         this.energyLevel = energyLevel;
     }
 
-    @Override
     /** Devuelve la representación en texto de los datos del perro. */
+    @Override
     public String toString() {
         return "ID: " + getId() + " | [Perro] Nombre: " + getName()
                 + " | Edad: " + getAge() + " años | Peso: " + getWeight()

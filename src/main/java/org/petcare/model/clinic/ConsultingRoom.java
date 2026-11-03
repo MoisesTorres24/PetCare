@@ -1,9 +1,5 @@
 package org.petcare.model.clinic;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
 /** Representa un consultorio identificado dentro de la clínica. */
 public class ConsultingRoom {
     /** Número o código del consultorio. */

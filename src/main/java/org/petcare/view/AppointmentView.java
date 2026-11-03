@@ -81,6 +81,11 @@ public class AppointmentView {
         }
     }
 
+    /**
+     * Imprime las citas existentes para que el usuario pueda seleccionar una.
+     *
+     * @return {@code true} si existe al menos una cita
+     */
     private boolean showAppointments() {
         if (clinic.getAppointments().isEmpty()) {
             System.out.println("No hay citas registradas.");
@@ -98,6 +103,11 @@ public class AppointmentView {
         return true;
     }
 
+    /**
+     * Verifica que existan mascotas y veterinarios antes de iniciar el agendamiento.
+     *
+     * @return {@code true} si están disponibles los datos requeridos
+     */
     private boolean hasRequiredData() {
         if (clinic.getAllVeterinarians().isEmpty()) {
             System.out.println("No hay veterinarios registrados.");
@@ -111,6 +121,9 @@ public class AppointmentView {
         return true;
     }
 
+    /**
+     * Muestra las mascotas y veterinarios que pueden seleccionarse.
+     */
     private void showAvailableData() {
         System.out.println("Mascotas:");
         for (Client client : clinic.getAllClients()) {
@@ -126,6 +139,12 @@ public class AppointmentView {
         }
     }
 
+    /**
+     * Solicita y resuelve el identificador de una mascota.
+     *
+     * @return mascota seleccionada
+     * @throws IllegalArgumentException si el identificador no existe
+     */
     private Pet selectPet() {
         int id = InputHelper.readInt(scanner, "ID de la mascota");
         for (Pet pet : clinic.getAllPets()) {
@@ -136,6 +155,12 @@ public class AppointmentView {
         throw new IllegalArgumentException("No existe una mascota con ese ID");
     }
 
+    /**
+     * Solicita y resuelve el identificador de un veterinario.
+     *
+     * @return veterinario seleccionado
+     * @throws IllegalArgumentException si el identificador no existe
+     */
     private Veterinarian selectVeterinarian() {
         int id = InputHelper.readInt(scanner, "ID del veterinario");
         for (Veterinarian vet : clinic.getAllVeterinarians()) {
@@ -146,6 +171,12 @@ public class AppointmentView {
         throw new IllegalArgumentException("No existe un veterinario con ese ID");
     }
 
+    /**
+     * Lee los componentes de fecha y hora y los convierte en un valor de dominio.
+     *
+     * @return fecha y hora capturadas
+     * @throws IllegalArgumentException si la fecha u hora no son válidas
+     */
     private LocalDateTime readDateTime() {
         try {
             int year = InputHelper.readInt(scanner, "Año");
@@ -159,6 +190,11 @@ public class AppointmentView {
         }
     }
 
+    /**
+     * Construye la lista de servicios solicitados y muestra su costo acumulado.
+     *
+     * @return servicios seleccionados para la cita
+     */
     private List<Service> buildServices() {
         List<Service> services = new ArrayList<>();
         double total = 0;

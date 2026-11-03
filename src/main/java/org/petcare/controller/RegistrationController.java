@@ -87,6 +87,14 @@ public class RegistrationController {
 
     /**
      * Registra un perro y lo asocia a un cliente existente.
+     *
+     * @param clientId identificador del dueño
+     * @param petName nombre del perro
+     * @param age edad en años
+     * @param weight peso en kilogramos
+     * @param breed raza del perro
+     * @param energyLevel nivel de energía
+     * @return perro registrado
      */
     public Dog registerDog(int clientId, String petName, int age, double weight, String breed, String energyLevel) {
         Client client = getRequiredClient(clientId);
@@ -98,6 +106,13 @@ public class RegistrationController {
 
     /**
      * Registra un gato y lo asocia a un cliente existente.
+     *
+     * @param clientId identificador del dueño
+     * @param petName nombre del gato
+     * @param age edad en años
+     * @param weight peso en kilogramos
+     * @param domestic indica si el gato es doméstico
+     * @return gato registrado
      */
     public Cat registerCat(int clientId, String petName, int age, double weight, boolean domestic) {
         Client client = getRequiredClient(clientId);
@@ -109,6 +124,13 @@ public class RegistrationController {
 
     /**
      * Registra un ave exótica y la asocia a un cliente existente.
+     *
+     * @param clientId identificador del dueño
+     * @param petName nombre del ave
+     * @param age edad en años
+     * @param weight peso en kilogramos
+     * @param wingSpan envergadura en centímetros
+     * @return ave registrada
      */
     public ExoticBird registerExoticBird(int clientId, String petName, int age, double weight, double wingSpan) {
         Client client = getRequiredClient(clientId);
