@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.3](https://github.com/MoisesTorres24/PetCare/compare/v0.6.2...v0.6.3) (2026-11-03)
+
+
+### Documentation
+
+* add javadoc in docs/api ([#20](https://github.com/MoisesTorres24/PetCare/issues/20)) ([4fe124f](https://github.com/MoisesTorres24/PetCare/commit/4fe124f0597a98cf3ee91b13ea6fd94ec2199d1b))
+
 ## [0.6.2](https://github.com/MoisesTorres24/PetCare/compare/v0.6.1...v0.6.2) (2026-11-03)
 
 
