@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.2](https://github.com/MoisesTorres24/PetCare/compare/v0.6.1...v0.6.2) (2026-11-03)
+
+
+### Bug Fixes
+
+* create the Test class to set up the test scenario ([#18](https://github.com/MoisesTorres24/PetCare/issues/18)) ([56111cf](https://github.com/MoisesTorres24/PetCare/commit/56111cf86ef167b0104383e1f2cc420e994ceb17))
+
 ## [0.6.1](https://github.com/MoisesTorres24/PetCare/compare/v0.6.0...v0.6.1) (2026-11-02)
 
 
