@@ -1,0 +1,8 @@
+org.petcare.app
+org.petcare.controller
+org.petcare.model.clinic
+org.petcare.model.person
+org.petcare.model.pet
+org.petcare.model.service
+org.petcare.util
+org.petcare.view

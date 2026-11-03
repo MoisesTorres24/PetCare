@@ -163,7 +163,7 @@ public class ClinicOperationsView {
         boolean found = false;
         for (Appointment appointment : clinic.getAppointments()) {
             if (appointment.getStatus() == AppointmentStatus.COMPLETED) {
-                System.out.println(appointment.toString());
+                System.out.println(appointment);
                 found = true;
             }
         }

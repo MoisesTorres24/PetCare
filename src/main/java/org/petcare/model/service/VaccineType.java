@@ -9,7 +9,7 @@ public enum VaccineType {
     /**
      * Costo unitario de la vacuna.
      */
-    private double cost;
+    private final double cost;
 
     /**
      * Crea un tipo de vacuna con su costo.

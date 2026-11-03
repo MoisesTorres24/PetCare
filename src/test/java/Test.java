@@ -15,10 +15,11 @@ import org.petcare.model.service.VaccineType;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class Test {
-    public static void main(String[] args) {
+    static void main(String[] args) {
         // Instanciamos la clínica y sus tres controladores
         Clinic clinic = new Clinic("PetCare", 5);
         RegistrationController reg = new RegistrationController(clinic);
@@ -40,9 +41,9 @@ public class Test {
         Appointment a1 = appCtrl.scheduleAppointment(dog, v1, LocalDateTime.of(2026, 11, 10, 10, 0),
                 Arrays.asList(new GeneralConsultation(), new Vaccination(VaccineType.RABIES)));
         Appointment a2 = appCtrl.scheduleAppointment(cat, v2, LocalDateTime.of(2026, 11, 10, 12, 0),
-                Arrays.asList(new Surgery(2.0, SurgeryComplexity.MEDIUM)));
+                List.of(new Surgery(2.0, SurgeryComplexity.MEDIUM)));
         Appointment a3 = appCtrl.scheduleAppointment(bird, v1, LocalDateTime.of(2026, 11, 11, 9, 0),
-                Arrays.asList(new GeneralConsultation()));
+                List.of(new GeneralConsultation()));
 
         // 4. Atendemos las dos primeras citas e imprimimos sus comprobantes con el costo total
         appCtrl.changeAppointmentStatus(a1.getId(), AppointmentStatus.COMPLETED);
@@ -53,7 +54,7 @@ public class Test {
         // 5. Intentar agendar una cita que viole una regla de negocio y mostrar el error
         try {
             // Misma fecha, hora y veterinario que la cita a3 (que sigue programada)
-            appCtrl.scheduleAppointment(dog, v1, a3.getDateTime(), Arrays.asList(new GeneralConsultation()));
+            appCtrl.scheduleAppointment(dog, v1, a3.getDateTime(), List.of(new GeneralConsultation()));
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
